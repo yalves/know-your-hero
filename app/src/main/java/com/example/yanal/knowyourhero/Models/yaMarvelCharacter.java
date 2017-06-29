@@ -129,7 +129,7 @@ public class yaMarvelCharacter implements Parcelable {
     }
 
     public String getIncredibleThumbnailUrl() {
-        return this.getThumbnail().getPath() + "/portrait_incredible." + this.getThumbnail().getExtension();
+        return this.getThumbnail().getPath() + "/landscape_incredible." + this.getThumbnail().getExtension();
     }
 
     protected yaMarvelCharacter(Parcel in) {
