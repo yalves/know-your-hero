@@ -25,6 +25,7 @@ public class yaNetworkUtils {
 
             connection = (HttpURLConnection) apiEnd.openConnection();
             connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept-Charset", "UTF-8");
             connection.setReadTimeout(15000);
             connection.setConnectTimeout(15000);
             connection.connect();

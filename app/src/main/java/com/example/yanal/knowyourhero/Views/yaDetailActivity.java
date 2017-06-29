@@ -4,23 +4,25 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.yanal.knowyourhero.Models.yaMarvelCharacter;
 import com.example.yanal.knowyourhero.R;
 import com.squareup.picasso.Picasso;
 
-import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 
+/*
+YA Yan Alves Monteiro - Activity principal
+*/
 public class yaDetailActivity extends AppCompatActivity {
 
     private yaMarvelCharacter character;
@@ -28,21 +30,17 @@ public class yaDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling);
+        setContentView(R.layout.layout_ya_activity_scrolling);
 
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //Botao flutuante
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(yaDetailActivity.this,
+                        "You liked " + character.getName(), Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         Intent intent = getIntent();
@@ -56,6 +54,10 @@ public class yaDetailActivity extends AppCompatActivity {
         TextView txtDescription = (TextView) findViewById(R.id.txtDescriptionDetail);
         txtDescription.setText(UTF8toISO(character.getDescription()));
 
+        TextView txtEditions = (TextView) findViewById(R.id.txtEditionsDetail);
+        int ya = character.getComics().getAvailable();
+        txtEditions.setText(String.valueOf(ya));
+
         ImageView imgAvatar = (ImageView) findViewById(R.id.avatarDetailedCharacter);
 
         Picasso.with(this)
@@ -64,6 +66,9 @@ public class yaDetailActivity extends AppCompatActivity {
 
     }
 
+    /*
+    YA Yan Alves Monteiro - método para converter encoding de UTF-8 para ISO-8859-1
+     */
     public static String UTF8toISO(String str){
         Charset utf8charset = Charset.forName("UTF-8");
         Charset iso88591charset = Charset.forName("ISO-8859-1");

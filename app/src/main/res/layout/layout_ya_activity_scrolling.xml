@@ -51,7 +51,7 @@
         app:layout_anchorGravity="bottom|end" />
 
     <include
-        layout="@layout/content_scrolling"
+        layout="@layout/layout_ya_content_scrolling"
         android:layout_height="521dp" />
 
 </android.support.design.widget.CoordinatorLayout>

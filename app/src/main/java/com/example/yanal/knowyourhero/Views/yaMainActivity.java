@@ -35,7 +35,6 @@ public class yaMainActivity extends AppCompatActivity {
         lView.setAdapter(marvelCharacterAdapter);
 
         //Chamando a task async para recuperar dados da API
-
         taskGetCharacters.execute();
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,6 +50,7 @@ public class yaMainActivity extends AppCompatActivity {
         });
     }
 
+    //Método
     public void searchCharacters(View view)
     {
         EditText searchBox = (EditText) findViewById(R.id.txtBoxSearch);
