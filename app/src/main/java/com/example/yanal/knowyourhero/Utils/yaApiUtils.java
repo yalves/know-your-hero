@@ -4,23 +4,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
-import com.example.yanal.knowyourhero.Marvel.yaMarvelCharacter;
+import com.example.yanal.knowyourhero.Models.yaMarvelCharacter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ObjectNode;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,9 +26,8 @@ public class yaApiUtils {
         String json;
         json = yaNetworkUtils.getJSONFromAPI(end);
         Log.i("Resultado", json);
-        List<yaMarvelCharacter> retorno = parseJson(json);
 
-        return retorno;
+        return parseJson(json);
     }
 
     private List<yaMarvelCharacter> parseJson(String json){
@@ -44,16 +37,11 @@ public class yaApiUtils {
         try {
             node = new ObjectMapper().readValue(json, ObjectNode.class);
 
-            if (node.has("data")) {
-                System.out.println("resultados do request: " + node.get("data"));
-            }
-
-            String resultados = node.get("data").get("results").toString();
+            String results = node.get("data").get("results").toString();
 
             Type collectionType = new TypeToken<List<yaMarvelCharacter>>(){}.getType();
-            List<yaMarvelCharacter> characters = gson.fromJson(resultados, collectionType);
 
-            return characters;
+            return gson.fromJson(results, collectionType);
 
         } catch (IOException e) {
             e.printStackTrace();
